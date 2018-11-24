@@ -36,4 +36,44 @@ public class Appointment {
 
     public Appointment() {
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
 }

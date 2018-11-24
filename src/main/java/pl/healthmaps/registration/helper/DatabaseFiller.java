@@ -3,12 +3,12 @@ package pl.healthmaps.registration.helper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.healthmaps.registration.model.Doctor;
-import pl.healthmaps.registration.model.Hospital;
-import pl.healthmaps.registration.model.Illness;
-import pl.healthmaps.registration.model.Location;
+import pl.healthmaps.registration.model.*;
 import pl.healthmaps.registration.repository.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -19,6 +19,7 @@ public class DatabaseFiller implements InitializingBean {
     private final IDoctorRepository doctorRepository;
     private final IAppointmentRepository appointmentRepository;
     private final IIllnessRepository illnessRepository;
+    private final List<Doctor> doctorList = new ArrayList<>();
 
     @Autowired
     public DatabaseFiller(IHospitalRepository hospitalRepository, ILocationRepository locationRepository, IDoctorRepository doctorRepository, IAppointmentRepository appointmentRepository, IIllnessRepository illnessRepository) {
@@ -74,6 +75,7 @@ public class DatabaseFiller implements InitializingBean {
             for (int hospitalId = 2; hospitalId < 15; hospitalId += 2) { // Hospitals hold only even ids up to 14
                 Doctor doctor = new Doctor(getRandomFirstName(), getRandomLastName(), hospitalId);
                 doctorRepository.save(doctor);
+                doctorList.add(doctor);
             }
         }
     }
@@ -109,5 +111,29 @@ public class DatabaseFiller implements InitializingBean {
         addLocationsAndHospitals();
         addDoctors();
         addIllnesses();
+        addAppointments();
+    }
+
+    private void addAppointments() {
+        Appointment appointment;
+        for (Doctor doctor : doctorList) {
+            int hour = 8;
+            int minutes = 0;
+            for (int i = 0; i < 16; i++) {
+                appointment = new Appointment();
+                appointment.setDoctor(doctor);
+                LocalDateTime startDate = LocalDateTime.of(2018, 12, 1, hour, minutes);
+                if (minutes == 0) {
+                    minutes += 30;
+                } else {
+                    minutes = 0;
+                    hour++;
+                }
+                LocalDateTime endDate = LocalDateTime.of(2018, 12, 1, hour, minutes);
+                appointment.setStart(startDate);
+                appointment.setEnd(endDate);
+                appointmentRepository.save(appointment);
+            }
+        }
     }
 }
