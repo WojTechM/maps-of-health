@@ -23,6 +23,10 @@ public class Hospital {
         this.location = location;
     }
 
+    public Hospital() {
+
+    }
+
     public long getId() {
         return id;
     }

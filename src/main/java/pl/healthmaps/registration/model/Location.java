@@ -13,8 +13,8 @@ public class Location {
     private long id;
 
     private int hospital_id;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
 
     public Location(long id, int hospital_id, long latitude, long longitude) {
         this.id = id;
@@ -23,9 +23,22 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public long getId() { return id; }
+    public Location(int hospital_id, double latitude, double longitude) {
+        this.hospital_id = hospital_id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
-    public void setId(long id) { this.id = id; }
+    public Location() {
+
+    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public int getHospital_id() {
         return hospital_id;
@@ -35,17 +48,11 @@ public class Location {
         this.hospital_id = hospital_id;
     }
 
-    public long getLatitude() {
-        return latitude;
-    }
 
     public void setLatitude(long latitude) {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
-        return longitude;
-    }
 
     public void setLongitude(long longitude) {
         this.longitude = longitude;

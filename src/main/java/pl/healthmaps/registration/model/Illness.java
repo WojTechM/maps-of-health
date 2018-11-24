@@ -33,4 +33,8 @@ public class Illness {
     public Illness(String name) {
         this.name = name;
     }
+
+    public Illness() {
+
+    }
 }

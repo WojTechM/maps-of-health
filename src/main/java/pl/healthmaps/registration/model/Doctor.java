@@ -22,6 +22,9 @@ public class Doctor {
         this.hospital_id = hospital_id;
     }
 
+    public Doctor() {
+    }
+
     public long getId() {
         return id;
     }
