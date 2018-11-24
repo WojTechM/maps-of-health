@@ -7,24 +7,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.healthmaps.registration.model.Hospital;
-import pl.healthmaps.registration.service.HospitalService;
+import pl.healthmaps.registration.model.Doctor;
+import pl.healthmaps.registration.service.DoctorService;
 
 @RestController
-@RequestMapping("/api/hospital")
-public class HospitalRestController {
+@RequestMapping("/api/doctor")
+public class DoctorRestController {
 
-    private final HospitalService hospitalService;
+    private final DoctorService service;
 
     @Autowired
-    public HospitalRestController(HospitalService hospitalService) {
-        this.hospitalService = hospitalService;
+    public DoctorRestController(DoctorService service) {
+        this.service = service;
     }
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<Hospital> getHospitalById(@PathVariable(value = "id") long id) {
-        Hospital entity = hospitalService.getHospitalById(id);
-        return new ResponseEntity<>(new Hospital(1, "stub", "some random description!"), HttpStatus.OK);
+    ResponseEntity<Doctor> getDoctorById(@PathVariable(value = "id") long id) {
+        Doctor entity = service.findById(id);
+        return new ResponseEntity<>(new Doctor("jan", "kowalski", 1), HttpStatus.OK);
+
 //        if (entity == null) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
