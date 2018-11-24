@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import pl.healthmaps.registration.model.Illness;
 import pl.healthmaps.registration.repository.IIllnessRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class IllnessService {
 
@@ -16,4 +19,13 @@ public class IllnessService {
     }
 
     public Illness getIllnessById(long id) { return repository.findById(id).orElse(null); }
+
+    public List<Illness> getAllIllnesses() {
+//        return repository.findAll();
+        List<Illness> stub = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            stub.add(new Illness("illness" + i));
+        }
+        return stub;
+    }
 }
