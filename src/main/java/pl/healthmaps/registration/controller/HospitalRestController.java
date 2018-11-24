@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.healthmaps.registration.model.Hospital;
+import pl.healthmaps.registration.model.Location;
 import pl.healthmaps.registration.service.HospitalService;
 
 @RestController
@@ -22,9 +23,9 @@ public class HospitalRestController {
     }
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<Hospital> getHospitalById(@PathVariable(value = "id") long id) {
+    String getHospitalById(@PathVariable(value = "id") long id) {
         Hospital entity = hospitalService.getHospitalById(id);
-        return new ResponseEntity<>(new Hospital(1, "stub", "some random description!"), HttpStatus.OK);
+        return new Hospital("stub", "some random description!", new Location(1, 1, 52, 21)).toGson();
 //        if (entity == null) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }

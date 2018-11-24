@@ -1,9 +1,8 @@
 package pl.healthmaps.registration.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.google.gson.Gson;
+
+import javax.persistence.*;
 
 @Entity
 public class Hospital {
@@ -15,11 +14,13 @@ public class Hospital {
     private String name;
     private String description;
 
+    @OneToOne
+    private Location location;
 
-    public Hospital(long id, String name, String description) {
-        this.id = id;
+    public Hospital(String name, String description, Location location) {
         this.name = name;
         this.description = description;
+        this.location = location;
     }
 
     public long getId() {
@@ -44,5 +45,10 @@ public class Hospital {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toGson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }
