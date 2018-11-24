@@ -22,7 +22,7 @@ public class HospitalRestController {
     }
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<Hospital> getExcavationById(@PathVariable(value = "id") long id) {
+    ResponseEntity<Hospital> getHospitalById(@PathVariable(value = "id") long id) {
         Hospital entity = hospitalService.getHospitalById(id);
         return new ResponseEntity<>(new Hospital(1, "stub", "some random description!"), HttpStatus.OK);
 //        if (entity == null) {
