@@ -3,14 +3,11 @@ package pl.healthmaps.registration.helper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.healthmaps.registration.model.Appointment;
 import pl.healthmaps.registration.model.Doctor;
 import pl.healthmaps.registration.model.Hospital;
+import pl.healthmaps.registration.model.Illness;
 import pl.healthmaps.registration.model.Location;
-import pl.healthmaps.registration.repository.IAppointmentRepository;
-import pl.healthmaps.registration.repository.IDoctorRepository;
-import pl.healthmaps.registration.repository.IHospitalRepository;
-import pl.healthmaps.registration.repository.ILocationRepository;
+import pl.healthmaps.registration.repository.*;
 
 import java.util.Random;
 
@@ -21,13 +18,15 @@ public class DatabaseFiller implements InitializingBean {
     private final ILocationRepository locationRepository;
     private final IDoctorRepository doctorRepository;
     private final IAppointmentRepository appointmentRepository;
+    private final IIllnessRepository illnessRepository;
 
     @Autowired
-    public DatabaseFiller(IHospitalRepository hospitalRepository, ILocationRepository locationRepository, IDoctorRepository doctorRepository, IAppointmentRepository appointmentRepository) {
+    public DatabaseFiller(IHospitalRepository hospitalRepository, ILocationRepository locationRepository, IDoctorRepository doctorRepository, IAppointmentRepository appointmentRepository, IIllnessRepository illnessRepository) {
         this.hospitalRepository = hospitalRepository;
         this.locationRepository = locationRepository;
         this.doctorRepository = doctorRepository;
         this.appointmentRepository = appointmentRepository;
+        this.illnessRepository = illnessRepository;
     }
 
     private void addLocationsAndHospitals() {
@@ -71,8 +70,8 @@ public class DatabaseFiller implements InitializingBean {
     }
 
     private void addDoctors() {
-        for(int doctorsPerHospital = 0; doctorsPerHospital < 3; doctorsPerHospital++) {
-            for(int hospitalId = 2; hospitalId < 15; hospitalId += 2) { // Hospitals hold only even ids up to 14
+        for (int doctorsPerHospital = 0; doctorsPerHospital < 3; doctorsPerHospital++) {
+            for (int hospitalId = 2; hospitalId < 15; hospitalId += 2) { // Hospitals hold only even ids up to 14
                 Doctor doctor = new Doctor(getRandomFirstName(), getRandomLastName(), hospitalId);
                 doctorRepository.save(doctor);
             }
@@ -94,12 +93,19 @@ public class DatabaseFiller implements InitializingBean {
     }
 
     private void addIllnesses() {
+        Illness illness;
 
+        String[] illnesses = {"Katar", "Kaszel", "Ból gardła", "Gorączka", "Zmęczenie", "Problemy ze snem",
+                "Wymioty", "Biegunka", "Zawroty głowy", "Menopauza", "Skurcze jelit", "Bóle brzucha", "Mdłości",
+                "Brak apetytu", "Bóle mięśni"};
+        for (String s : illnesses) {
+            illness = new Illness(s);
+            illnessRepository.save(illness);
+        }
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Appointment appointment = new Appointment();
         addLocationsAndHospitals();
         addDoctors();
         addIllnesses();

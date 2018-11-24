@@ -21,11 +21,6 @@ public class IllnessService {
     public Illness getIllnessById(long id) { return repository.findById(id).orElse(null); }
 
     public List<Illness> getAllIllnesses() {
-//        return repository.findAll();
-        List<Illness> stub = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            stub.add(new Illness("illness" + i));
-        }
-        return stub;
+        return repository.findAll();
     }
 }
