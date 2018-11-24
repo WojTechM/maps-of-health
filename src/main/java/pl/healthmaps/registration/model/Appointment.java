@@ -28,7 +28,10 @@ public class Appointment {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
+    @Column(name = "start_datetime")
     private LocalDateTime start;
+
+    @Column(name = "end_datetime")
     private LocalDateTime end;
 
     public Appointment() {
