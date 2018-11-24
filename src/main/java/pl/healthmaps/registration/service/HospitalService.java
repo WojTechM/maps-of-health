@@ -24,4 +24,8 @@ public class HospitalService {
     public List<Hospital> findAll() {
         return repository.findAll();
     }
+
+    public List<Hospital> findAllInSquare() {
+        return repository.findAllInSquare();
+    }
 }
