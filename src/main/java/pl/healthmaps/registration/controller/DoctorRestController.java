@@ -24,9 +24,11 @@ public class DoctorRestController {
     @GetMapping(path = "/{id}")
     ResponseEntity<Doctor> getDoctorById(@PathVariable(value = "id") long id) {
         Doctor entity = service.findById(id);
-        if (entity == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(entity, HttpStatus.OK);
+        return new ResponseEntity<>(new Doctor("jan", "kowalski", 1), HttpStatus.OK);
+
+//        if (entity == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 }
