@@ -5,11 +5,7 @@ import java.util.Optional;
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.healthmaps.registration.model.Patient;
 import pl.healthmaps.registration.service.PatientService;
 
@@ -27,5 +23,10 @@ public class PatientRestController {
     @GetMapping(value = "/patient")
     public List<Patient> getAllPatients() {
         return patientService.findAll();
+    }
+
+    @PostMapping(value = "/patient")
+    public void postPatientValues(@RequestBody Patient patient) {
+        System.out.println(patient);
     }
 }

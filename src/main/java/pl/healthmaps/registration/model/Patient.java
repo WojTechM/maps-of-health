@@ -53,4 +53,14 @@ public class Patient {
     public void setPesel(long pesel) {
         this.pesel = pesel;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", pesel=" + pesel +
+                '}';
+    }
 }
