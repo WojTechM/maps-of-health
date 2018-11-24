@@ -1,5 +1,6 @@
 package pl.healthmaps.registration.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,7 @@ public class PatientService {
     }
 
 
-
+    public List<Patient> findAll() {
+        return patientRepository.findAll();
+    }
 }

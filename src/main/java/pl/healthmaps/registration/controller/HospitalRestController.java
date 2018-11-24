@@ -1,5 +1,6 @@
 package pl.healthmaps.registration.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,5 +27,11 @@ public class HospitalRestController {
             return null;
         }
         return entity.toGson();
+    }
+
+    @GetMapping
+    String getAllHospitals() {
+        Gson gson = new Gson();
+        return gson.toJson(hospitalService.findAll());
     }
 }

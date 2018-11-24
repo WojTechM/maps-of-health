@@ -1,10 +1,11 @@
 package pl.healthmaps.registration.service;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.healthmaps.registration.model.Appointment;
 import pl.healthmaps.registration.repository.IAppointmentRepository;
+
+import java.util.List;
 
 @Service
 public class AppointmentService {
@@ -18,5 +19,9 @@ public class AppointmentService {
 
     public Appointment findById(long id) {
         return this.appointmentRepository.findById(id).orElse(null);
+    }
+
+    public List<Appointment> findAll() {
+        return this.appointmentRepository.findAll();
     }
 }

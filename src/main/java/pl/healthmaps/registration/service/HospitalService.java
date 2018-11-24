@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.healthmaps.registration.model.Hospital;
 import pl.healthmaps.registration.repository.IHospitalRepository;
 
+import java.util.List;
+
 @Service
 public class HospitalService {
 
@@ -17,5 +19,9 @@ public class HospitalService {
 
     public Hospital getHospitalById(long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    public List<Hospital> findAll() {
+        return repository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package pl.healthmaps.registration.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,10 @@ public class PatientRestController {
     @GetMapping(value = "/patient/{id}")
     public Optional<Patient> getPatientById(@PathVariable long id) {
         return patientService.findById(id);
+    }
+
+    @GetMapping(value = "/patient")
+    public List<Patient> getAllPatients() {
+        return patientService.findAll();
     }
 }

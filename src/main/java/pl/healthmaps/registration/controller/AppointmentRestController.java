@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.healthmaps.registration.model.Appointment;
 import pl.healthmaps.registration.service.AppointmentService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/appointment")
 public class AppointmentRestController {
@@ -24,5 +26,10 @@ public class AppointmentRestController {
     @GetMapping(path = "/{id}")
     ResponseEntity<Appointment> getAppointmentById(@PathVariable long id) {
         return new ResponseEntity<>(this.appointmentService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping()
+    ResponseEntity<List<Appointment>> getAllAppointments() {
+        return new ResponseEntity<>(this.appointmentService.findAll(), HttpStatus.OK);
     }
 }

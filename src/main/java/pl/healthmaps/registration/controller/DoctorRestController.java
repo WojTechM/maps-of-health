@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.healthmaps.registration.model.Doctor;
 import pl.healthmaps.registration.service.DoctorService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/doctor")
 public class DoctorRestController {
@@ -28,5 +30,10 @@ public class DoctorRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(entity, HttpStatus.OK);
+    }
+
+    @GetMapping
+    ResponseEntity<List<Doctor>> getAllDoctors() {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 }
