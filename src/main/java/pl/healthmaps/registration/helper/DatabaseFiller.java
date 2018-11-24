@@ -3,9 +3,11 @@ package pl.healthmaps.registration.helper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.healthmaps.registration.model.Appointment;
 import pl.healthmaps.registration.model.Doctor;
 import pl.healthmaps.registration.model.Hospital;
 import pl.healthmaps.registration.model.Location;
+import pl.healthmaps.registration.repository.IAppointmentRepository;
 import pl.healthmaps.registration.repository.IDoctorRepository;
 import pl.healthmaps.registration.repository.IHospitalRepository;
 import pl.healthmaps.registration.repository.ILocationRepository;
@@ -18,12 +20,14 @@ public class DatabaseFiller implements InitializingBean {
     private final IHospitalRepository hospitalRepository;
     private final ILocationRepository locationRepository;
     private final IDoctorRepository doctorRepository;
+    private final IAppointmentRepository appointmentRepository;
 
     @Autowired
-    public DatabaseFiller(IHospitalRepository hospitalRepository, ILocationRepository locationRepository, IDoctorRepository doctorRepository) {
+    public DatabaseFiller(IHospitalRepository hospitalRepository, ILocationRepository locationRepository, IDoctorRepository doctorRepository, IAppointmentRepository appointmentRepository) {
         this.hospitalRepository = hospitalRepository;
         this.locationRepository = locationRepository;
         this.doctorRepository = doctorRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     private void addLocationsAndHospitals() {
@@ -89,9 +93,15 @@ public class DatabaseFiller implements InitializingBean {
         return lastNames[index];
     }
 
+    private void addIllnesses() {
+
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
+        Appointment appointment = new Appointment();
         addLocationsAndHospitals();
         addDoctors();
+        addIllnesses();
     }
 }
