@@ -24,4 +24,8 @@ public class AppointmentService {
     public List<Appointment> findAll() {
         return this.appointmentRepository.findAll();
     }
+
+    public List<Appointment> findAppointmentByHospitalId(long id) {
+        return this.appointmentRepository.getAllByHospital(id);
+    }
 }

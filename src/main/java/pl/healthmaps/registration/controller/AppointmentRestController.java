@@ -28,8 +28,13 @@ public class AppointmentRestController {
         return new ResponseEntity<>(this.appointmentService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping()
+    @GetMapping
     ResponseEntity<List<Appointment>> getAllAppointments() {
         return new ResponseEntity<>(this.appointmentService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/byHospital/{id}")
+    ResponseEntity<List<Appointment>> getAppointmentByHospitalId(@PathVariable long id) {
+        return new ResponseEntity<>(this.appointmentService.findAppointmentByHospitalId(id), HttpStatus.OK);
     }
 }
