@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pl.healthmaps.registration.model.Patient;
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, Long> {
+public interface IPatientRepository extends JpaRepository<Patient, Long> {
     Optional<Patient> findByPesel(long pesel);
 }

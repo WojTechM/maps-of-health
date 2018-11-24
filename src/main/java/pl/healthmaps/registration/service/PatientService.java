@@ -1,18 +1,16 @@
 package pl.healthmaps.registration.service;
 
 import java.util.Optional;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import pl.healthmaps.registration.model.Patient;
-import pl.healthmaps.registration.repository.PatientRepository;
+import pl.healthmaps.registration.repository.IPatientRepository;
 
 @Service
 public class PatientService {
 
     @Autowired
-    private PatientRepository patientRepository;
+    private IPatientRepository patientRepository;
 
     public Optional<Patient> findByPesel(long pesel) {
         return patientRepository.findByPesel(pesel);
