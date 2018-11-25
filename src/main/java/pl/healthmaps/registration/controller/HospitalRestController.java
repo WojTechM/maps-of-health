@@ -17,6 +17,9 @@ import java.util.List;
 @RequestMapping("/api/hospital")
 public class HospitalRestController {
 
+    public static double latitude = 0;
+    public static double longitude = 0;
+
     private final HospitalService hospitalService;
 
     @Autowired

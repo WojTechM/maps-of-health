@@ -41,6 +41,8 @@ public class PatientRestController {
         for(String illness : content.getIllnesses()) {
             illnessRepository.save(new Illness(illness));
         }
+        HospitalRestController.latitude = content.getLocation().getLatitude();
+        HospitalRestController.longitude = content.getLocation().getLongitude();
         return HttpStatus.OK;
     }
 }
