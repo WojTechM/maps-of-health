@@ -17,6 +17,8 @@ import pl.healthmaps.registration.service.PatientService;
 @RestController
 public class PatientRestController {
 
+    public static DTOUserData user;
+
     private PatientService patientService;
     private IIllnessRepository illnessRepository;
 
@@ -43,6 +45,8 @@ public class PatientRestController {
         }
         HospitalRestController.latitude = content.getLocation().getLatitude();
         HospitalRestController.longitude = content.getLocation().getLongitude();
+        user = content;
+        System.out.println("SET LOCATION: " + HospitalRestController.latitude + " " + HospitalRestController.longitude);
         return HttpStatus.OK;
     }
 }

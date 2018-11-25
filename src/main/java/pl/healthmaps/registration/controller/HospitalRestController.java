@@ -43,7 +43,10 @@ public class HospitalRestController {
     }
 
     @GetMapping(path = "/square")
-    ResponseEntity<List<Hospital>> getHospitalsInSquare() {
-        return new ResponseEntity<>(hospitalService.findAllInSquare(latitude, longitude), HttpStatus.OK);
+    ResponseEntity<String> getHospitalsInSquare() {
+        Gson gson = new Gson();
+        List<Hospital> hospitals = hospitalService.findAllInSquare(latitude, longitude);
+        System.out.println("GET hospitals: (" + hospitals.size() + ") - " + latitude + " " + longitude);
+        return new ResponseEntity<>(gson.toJson(hospitals), HttpStatus.OK);
     }
 }
