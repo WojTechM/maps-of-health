@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pl.healthmaps.registration.model.DTOUserData;
 import pl.healthmaps.registration.model.Patient;
 import pl.healthmaps.registration.service.PatientService;
 
@@ -25,8 +27,9 @@ public class PatientRestController {
         return patientService.findAll();
     }
 
-    @PostMapping(value = "/patient")
-    public void postPatientValues(@RequestBody Patient patient) {
-        System.out.println(patient);
+    @PostMapping(value = "/api/patient")
+    public HttpStatus postPatientValues(@RequestBody DTOUserData content) {
+        System.out.println(content);
+        return HttpStatus.OK;
     }
 }
