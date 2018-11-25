@@ -6,6 +6,7 @@ import pl.healthmaps.registration.model.Appointment;
 import pl.healthmaps.registration.repository.IAppointmentRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -26,6 +27,9 @@ public class AppointmentService {
     }
 
     public List<Appointment> findAppointmentByHospitalId(long id) {
-        return this.appointmentRepository.getAllByHospital(id);
+        List<Appointment> appointments = this.appointmentRepository.getAllByHospital(id);
+        return appointments.stream()
+                .filter(appointment -> appointment.getPatient() == null)
+                .collect(Collectors.toList());
     }
 }
