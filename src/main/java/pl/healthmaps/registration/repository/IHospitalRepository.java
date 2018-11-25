@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface IHospitalRepository extends JpaRepository<Hospital, Long> {
 
-    @Query(value = "select * from hospital as h left join location as l on (h.id = l.hospital_id) where l.longitude between 20 and 21;", nativeQuery = true)
-    public List<Hospital> findAllInSquare();
+    @Query(value = "select * from hospital as h left join location as l on (h.id = l.hospital_id) where l.longitude between (?1 -1) and (?2 + 1);", nativeQuery = true)
+    public List<Hospital> findAllInSquare(double latitude, double longitude);
 }

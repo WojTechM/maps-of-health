@@ -25,7 +25,7 @@ public class HospitalService {
         return repository.findAll();
     }
 
-    public List<Hospital> findAllInSquare() {
-        return repository.findAllInSquare();
+    public List<Hospital> findAllInSquare(double latitude, double longitude) {
+        return repository.findAllInSquare(latitude, longitude);
     }
 }

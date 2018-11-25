@@ -44,6 +44,6 @@ public class HospitalRestController {
 
     @GetMapping(path = "/square")
     ResponseEntity<List<Hospital>> getHospitalsInSquare() {
-        return new ResponseEntity<>(hospitalService.findAllInSquare(), HttpStatus.OK);
+        return new ResponseEntity<>(hospitalService.findAllInSquare(latitude, longitude), HttpStatus.OK);
     }
 }
