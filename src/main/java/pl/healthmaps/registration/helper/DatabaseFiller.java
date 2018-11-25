@@ -130,7 +130,7 @@ public class DatabaseFiller implements InitializingBean {
     }
 
     private void addNullIsland() {
-        Location location = new Location(0, 0, 0);
+        Location location = new Location(388, 0, 0);
         Hospital hospital = new Hospital("NULL ISLAND", "0 0 position", location);
         locationRepository.save(location);
         hospitalRepository.save(hospital);
