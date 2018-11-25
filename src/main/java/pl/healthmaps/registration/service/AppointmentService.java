@@ -32,4 +32,8 @@ public class AppointmentService {
                 .filter(appointment -> appointment.getPatient() == null)
                 .collect(Collectors.toList());
     }
+
+    public void persist(Appointment appointment) {
+        appointmentRepository.save(appointment);
+    }
 }
