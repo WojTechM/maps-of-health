@@ -106,14 +106,6 @@ public class DatabaseFiller implements InitializingBean {
         }
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        addLocationsAndHospitals();
-        addDoctors();
-        addIllnesses();
-        addAppointments();
-    }
-
     private void addAppointments() {
         Appointment appointment;
         for (Doctor doctor : doctorList) {
@@ -135,5 +127,21 @@ public class DatabaseFiller implements InitializingBean {
                 appointmentRepository.save(appointment);
             }
         }
+    }
+
+    private void addNullIsland() {
+        Location location = new Location(0, 0, 0);
+        Hospital hospital = new Hospital("NULL ISLAND", "0 0 position", location);
+        locationRepository.save(location);
+        hospitalRepository.save(hospital);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        addLocationsAndHospitals();
+        addDoctors();
+        addIllnesses();
+        addAppointments();
+        addNullIsland();
     }
 }
