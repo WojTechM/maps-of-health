@@ -8,14 +8,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.healthmaps.registration.model.DTOUserData;
+import pl.healthmaps.registration.model.Illness;
 import pl.healthmaps.registration.model.Patient;
+import pl.healthmaps.registration.repository.IIllnessRepository;
+import pl.healthmaps.registration.service.IllnessService;
 import pl.healthmaps.registration.service.PatientService;
 
 @RestController
 public class PatientRestController {
 
-    @Autowired
     private PatientService patientService;
+    private IIllnessRepository illnessRepository;
+
+    @Autowired
+    public PatientRestController(PatientService patientService, IIllnessRepository illnessRepository) {
+        this.patientService = patientService;
+        this.illnessRepository = illnessRepository;
+    }
 
     @GetMapping(value = "/patient/{id}")
     public Optional<Patient> getPatientById(@PathVariable long id) {
@@ -29,7 +38,9 @@ public class PatientRestController {
 
     @PostMapping(value = "/api/patient")
     public HttpStatus postPatientValues(@RequestBody DTOUserData content) {
-        System.out.println(content);
+        for(String illness : content.getIllnesses()) {
+            illnessRepository.save(new Illness(illness));
+        }
         return HttpStatus.OK;
     }
 }
